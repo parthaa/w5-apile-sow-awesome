@@ -5,8 +5,12 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-extensions = "*"
+werkzeug = "*"
+mimesis = "*"
 
 [dev-packages]
+mimesis = "*"
 
 [requires]
 python_version = "3.7"

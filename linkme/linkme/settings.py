@@ -31,19 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #ourapp
+    # ourapp
     'linkworld',
 
-    #django installed apps
+    # django installed apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    #thirdpartyapps
-    
+
+    # thirdpartyapps
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
