@@ -1,0 +1,43 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}
+                LinkMe
+        {% endblock title %}<!-- we want to override page titles -->
+        </title>
+        
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+   
+  
+   
+    {% block header %}
+    
+    {% endblock header %}
+    </head>
+
+<body> 
+    
+<!-- as well as override content bits -->
+
+        <header>
+                    <h1>LinkWorld</h1>
+                    
+                    <h2>Information linked to your fingertips...</h2>
+                
+                
+                
+             
+        </header>
+    
+    {% block content %}
+    
+    {% endblock content %}
+    
+    {% block footer %}
+    
+    {% endblock footer %}
+    
+    </body>
+</html>
