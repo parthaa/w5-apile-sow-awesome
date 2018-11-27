@@ -18,4 +18,4 @@ class Vote(models.Model):
 
     post = models.ForeignKey(to="Post", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    choice = models.BooleanField()
+    choice = models.BooleanField(default=False)
