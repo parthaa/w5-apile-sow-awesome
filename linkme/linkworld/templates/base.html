@@ -5,7 +5,7 @@
     <head>
         <title>{% block title %}
                 LinkMe
-        {% endblock title %}<!-- we want to override page titles -->
+        {% endblock title %}
         </title>
         
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -35,11 +35,22 @@
                     {% endif %}
                 </ul>
             </nav>
+   
+
+<body> 
+    
+<!-- as well as override content bits -->
+<div class="header">
+        <header>
+                    <h1>LinkWorld</h1>
+                    
+                    <h2 class="blinking">Information linked to your fingertips...</h2>
+                
                 
                 
              
         </header>
-    
+</div>    
     {% block content %}
     
     {% endblock content %}
