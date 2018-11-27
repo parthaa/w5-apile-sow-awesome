@@ -26,6 +26,3 @@ class Comment(models.Model):
         'Post',
         on_delete=models.CASCADE,
         related_name="comments")
-
-  class Meta:
-    unique_together= (('post', 'author'),)
