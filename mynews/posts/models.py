@@ -14,6 +14,7 @@ class Vote(models.Model):
         'Post',
         on_delete=models.CASCADE,
         related_name="votes")
+  liked = models.BooleanField(default=False)
 
   class Meta:
     unique_together= (('post', 'voter'),)
