@@ -9,6 +9,17 @@
 {% endblock title %}
 
 {% block content %}
- <p>random content</p>
+
+{% for post in posts %}
+  <h3> <a href = "{{ post.title }}">{{ post.title }}</a></h3>
+   <p><a href="{{ post.url }}">link</a></p>
+   <p> {{ post.text|truncatewords:100 }} </p>
+   <p class="author"> by {{ post.author | title }} </p>
+   {% comment %} <p> {{ post.date | date: "Y m d }} {% endcomment %}
+
+    {% endfor %}
+    
+
+ 
 
 {% endblock content %}  

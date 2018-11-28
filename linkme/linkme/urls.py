@@ -41,6 +41,16 @@ urlpatterns = [
     path('accounts/password/done/', PasswordResetCompleteView.as_view,
          template_name='registration/password_reset_complete.html'),
          name="password_reset_complete"),
+from linkworld.backends import MyRegistrationView
+
+
+urlpatterns = [
+    path("", views.index, name="home"),
+
+
+    path('accounts/register/', MyRegistrationView.as_view(),
+         name='registration_register'),
+
     path('accounts/', include('registration.backends.simple.urls')),
     path('posts/<slug>/')
     path('admin/', admin.site.urls),

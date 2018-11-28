@@ -6,6 +6,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     title = models.CharField(max_length=255)
+    url = models.URLField()
 
 
 class Comment(models.Model):
