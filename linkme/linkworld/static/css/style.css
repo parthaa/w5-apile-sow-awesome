@@ -6,7 +6,7 @@
 }
 
 body { 
-    background: url(https://images.pexels.com/photos/145683/pexels-photo-145683.jpeg?cs=srgb&dl=beautiful-calm-chain-145683.jpg&fm=jpg);
+    background-color: skyblue 
     
 }
 
@@ -19,7 +19,7 @@ h1 {
 .blinking
         
         {
-            animation: blinker 2s linear infinite;
+            animation: blinker 5s linear infinite;
           }
           
           @keyframes blinker {
@@ -32,5 +32,8 @@ h1 {
            
         }
 
-
+.author {
+     font-weight: bold;
+     color: maroon
+}
 
