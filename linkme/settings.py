@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # thirdpartyapps
     'registration',
     'django_extensions',
+    'mimesis',
 
 ]
 
