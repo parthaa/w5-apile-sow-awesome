@@ -16,9 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from linkworld import views
+# from linkworld.backends import MyRegistrationView
+from django.contrib.auth.views import (
+    # PasswordChangeView,
+    # PasswordChangeDoneView,
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,
+)
 
 urlpatterns = [
     path("", views.index, name="home"),
+    path('accounts/password/reset/', PasswordResetView,
+         {'template_name': 'registration/password_reset_form.html'}, name="password_reset"),
+    path('accounts/password/reset/done/', PasswordResetDoneView,
+         {'template_name': 'registration/password_reset_done.html'}, name="password_reset_done"),
+    path('accounts/password/reset/<uidb64>/<token>/', PasswordResetConfirmView,
+         {'template_name': 'registration/password_reset_confirm.html'}, name="password_reset_confirm"),
+    path('accounts/password/done/', PasswordResetCompleteView,
+         {'template_name': 'registration/password_reset_complete.html'},
+         name="password_reset_complete"),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
 ]
