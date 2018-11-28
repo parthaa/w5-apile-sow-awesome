@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     # ourapp
     'linkworld',
 
-
     # django installed apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +44,8 @@ INSTALLED_APPS = [
 
     # thirdpartyapps
     'registration',
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
