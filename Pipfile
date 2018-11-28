@@ -9,6 +9,9 @@ django-registration-redux = "==2.0"
 django-extensions = "*"
 werkzeug = "*"
 mimesis = "*"
+"psycopg2" = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 mimesis = "*"
