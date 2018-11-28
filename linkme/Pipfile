@@ -11,6 +11,7 @@ werkzeug = "*"
 mimesis = "*"
 "psycopg2" = "*"
 gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 mimesis = "*"
