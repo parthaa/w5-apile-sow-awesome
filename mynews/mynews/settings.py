@@ -27,10 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
 
 # Application definition
 
 INSTALLED_APPS = [
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,6 +56,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mynews.urls'
 
+ACCOUNT_ACTIVATION_DAYS = 7
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
