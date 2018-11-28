@@ -19,11 +19,11 @@ class Command(BaseCommand):
         person = Person()
         for _ in range(10):
             User.objects.create_user
-
+        # date = Datetime()
         text = Text()
         internet = Internet()
         users = User.objects.all()
         for _ in range(30):
             post = Post.objects.create(author=choice(
-                users), text=text.text(), title=text.title(), url=internet.home_page())
+                users), text=text.text(), title=text.title(), url=internet.home_page(), )
             post.save()
