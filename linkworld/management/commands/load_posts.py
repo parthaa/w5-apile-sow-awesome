@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
 import os.path
-from linkworld.models import Post
+from linkworld.models import Post, Comment
 from mimesis import Person, Text, Internet, Datetime
 from random import choice
 from django.contrib.auth.models import User
@@ -30,3 +30,8 @@ class Command(BaseCommand):
             if not Post.objects.filter(title=title).exists():
                 Post.objects.create(author=choice(
                     users), text=text.text(), title=title, url=internet.home_page(), )
+
+        posts = Post.objects.all()
+        for _ in range(10):
+            Comment.objects.create(commenter=choice(
+                users), post=choice(posts), title=text.title(), content=text.sentence())
