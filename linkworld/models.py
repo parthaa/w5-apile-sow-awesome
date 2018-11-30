@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 
 
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     text = models.TextField()
     title = models.CharField(max_length=255)
     url = models.URLField(max_length=200, null=True)
@@ -21,18 +21,17 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     content = models.TextField()
     title = models.CharField(max_length=255)
-    post = models.ForeignKey(to="Post", on_delete=models.CASCADE)
+    post = models.ForeignKey(to="Post", on_delete=models.CASCADE, null=True, related_name="comments")
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.text
+        return self.content
 
 
 class Vote(models.Model):
-
-    post = models.ForeignKey(to="Post", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(to="Post", on_delete=models.CASCADE, null=True, related_name="votes")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="votes")
     choice = models.BooleanField(default=False)

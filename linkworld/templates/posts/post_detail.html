@@ -9,16 +9,16 @@
 {% endblock title %}
 
 {% block content %}
-   
+
     <p>{{ post.title }}</p>
     <h2>{{ post.author }}</h2>
-   
+
     <p>{{ post.text }}</p>
-  
+
 
     <hr>
         <a class="btn btn-default" href="{% url 'comment_on_post' slug=post.slug %}">Add comment</a>
-        
+
         {% for comment in post.comments.all %}
 
                 <h3>  <strong> {{ comment.title }}</strong></h3>
@@ -26,13 +26,13 @@
             <p>{{ comment.content }}</p>
 
           <p>  <strong>{{ comment.commenter }}</strong></p>
-        
+
         </div>
 
             {% empty %}
-        
+
         <p>No comments here yet :(</p>
-       
+
         {% endfor %}
      {% endblock content %}
 
