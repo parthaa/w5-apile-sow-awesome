@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load el_pagination_tags %}
 {% load staticfiles %}
 
 {% block title %}
@@ -10,16 +10,24 @@
 
 {% block content %}
 <p><a href="{% url 'new_post'  %}">Do you want to add a new post?</a> </p>
+
+{% paginate posts %}
 {% for post in posts %}
   <h3> <a href ="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
    <p><a href="{{ post.url }}">link</a></p>
    <p> {{ post.text|truncatewords:100 }} </p>
    <p class="author"> by {{ post.author | title }} </p>
-   {% comment %} <p> {{ post.date | date: "Y m d }} {% endcomment %}
+   
 
    <hr>
 
-<a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, Votes: {{ post.votes.count }}</a>
+<a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, </a>
     <hr>
+{% comment %} 
+<a href="upvote/{{ post.slug }}" Votes: {{ post.votes.count }}>Like me!</a> {% endcomment %}
 {% endfor %}
+
+{% show_pages %}
+
+
 {% endblock content %}

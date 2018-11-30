@@ -1,5 +1,5 @@
 from django.contrib import admin
-from linkworld.models import Post, Comment, Vote
+from linkworld.models import Post, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -14,4 +14,3 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Vote)

@@ -47,3 +47,10 @@ def comment_on_post(request, slug):
     else:
         form = CommentForm()
     return render(request, 'posts/comment_on_post.html', {'form': form})
+
+
+# def upvote(request, slug):
+#     post = Post.objects.get(slug=slug)
+#     post.score += 1
+#     post.save()
+#     return redirect('home', slug-post.slug)

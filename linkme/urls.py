@@ -32,7 +32,7 @@ urlpatterns = [
     path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('posts/<slug>/comment/', views.comment_on_post,
          name='comment_on_post'),
-
+    # path('upvote/<slug>/vote', views.upvote, name='upvote'),
     path('posts/new_post', views.new_post, name='new_post'),
     path('accounts/password/reset/', PasswordResetView.as_view(
         template_name='registration/password_reset_form.html'), name="password_reset"),
@@ -50,5 +50,6 @@ urlpatterns = [
     path('accounts/register/', MyRegistrationView.as_view(),
          name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]
