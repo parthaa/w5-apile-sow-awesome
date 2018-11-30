@@ -6,7 +6,8 @@
 }
 
 body { 
-    background-color: skyblue 
+    
+    background-color: skyblue;
     
 }
 
@@ -32,8 +33,15 @@ h1 {
            
         }
 
+
 .author {
-     font-weight: bold;
-     color: maroon
+     
+    color: maroon;
 }
 
+.comment {
+
+    font-size:15px;
+    color: greenyellow;
+
+}
