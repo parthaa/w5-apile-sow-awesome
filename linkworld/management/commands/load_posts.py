@@ -34,4 +34,4 @@ class Command(BaseCommand):
         posts = Post.objects.all()
         for _ in range(10):
             Comment.objects.create(commenter=choice(
-                users), post=choice(posts), title=text.title(), content=text.sentence())
+                users), post=choice(posts), content=text.sentence())
