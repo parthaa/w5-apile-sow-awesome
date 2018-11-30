@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from linkworld import views
+import linkworld
 from django.conf.urls import url
 from linkworld.backends import MyRegistrationView
 from django.contrib.auth.views import (
@@ -26,9 +27,11 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
 )
+
+
 urlpatterns = [
     path("", views.index, name="home"),
-
+    path("data/", include("linkworld.urls")),
     path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('posts/<slug>/comment/', views.comment_on_post,
          name='comment_on_post'),

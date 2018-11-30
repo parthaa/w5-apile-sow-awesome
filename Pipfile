@@ -12,6 +12,7 @@ mimesis = "*"
 "psycopg2" = "*"
 gunicorn = "*"
 django-heroku = "*"
+django-rest-framework="*"
 
 [dev-packages]
 mimesis = "*"

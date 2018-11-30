@@ -4,6 +4,9 @@ from django.shortcuts import get_object_or_404
 from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+from .serializers import PostSerializer, CommentSerializer, UserSerializer
 
 
 def index(request):
@@ -47,3 +50,17 @@ def comment_on_post(request, slug):
     else:
         form = CommentForm()
     return render(request, 'posts/comment_on_post.html', {'form': form})
+
+
+
+class PostView(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+class CommentView(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

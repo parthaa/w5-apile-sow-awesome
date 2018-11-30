@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'registration',
     'django_extensions',
     'mimesis',
-
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
