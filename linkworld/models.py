@@ -9,19 +9,24 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField(max_length=200, null=True)
     date = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=255)
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
+    def approved_comments(self):
+        return self.comments.filter(approved_comment=True)
+
 
 class Comment(models.Model):
     commenter = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
+    title = models.CharField(max_length=255)
     post = models.ForeignKey(to="Post", on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
+    approved_comment = models.BooleanField(default=False)
 
     def approve(self):
         self.approved_comment = True

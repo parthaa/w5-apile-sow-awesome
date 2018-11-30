@@ -15,11 +15,11 @@
   <h3> <a href = "{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
   <p class="author"> by {{ post.author | title }} </p>
    <p><a href="{{ post.url }}">link</a></p>
-   <p> {{ post.text|truncatewords:100 }} </p>
+   <p> {{ post.text|truncatewords:50 }} </p>
    
    <hr>
-   
-    <a href="{% url 'post_detail' slug=post.slug %}">Comments:{{ post.comments.count }}</a>
+   <a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.approved_comments.count }}</a>
+    
     
         <hr>
 

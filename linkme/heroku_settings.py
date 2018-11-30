@@ -1,7 +1,5 @@
-from linkworld.settings import *
-import django_heroku
+import django-heroku
 
 DEBUG = False
 
-
-django.heroku.settings(locals)
+django-heroku.settings(locals)

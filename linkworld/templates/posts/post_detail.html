@@ -20,10 +20,21 @@
     <hr>
         <a class="btn btn-default" href="{% url 'comment_on_post' slug=post.slug %}">Add comment</a>
         {% for comment in post.comments.all %}
+             {% if user.is_authenticated or comment.approved_comment %}
+                    <div class="date">
+                        {{ comment.date }}
+                {% if not comment.approved_comment %}
+                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+            {% endif %}
         <div class="comment">
-            
-            <strong>{{ comment.commenter }}</strong>
-        <p>{{ comment.content }}</p>
+
+                <h3>  <strong> {{ comment.title }}</strong></h3>
+
+            <p>{{ comment.content }}</p>
+
+          <p>  <strong>{{ comment.commenter }}</strong></p>
+        
         </div>
 
             {% empty %}

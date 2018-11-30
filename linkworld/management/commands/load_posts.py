@@ -15,15 +15,18 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
+        Post.objects.all().delete()
         users = []
         person = Person()
         for _ in range(10):
-            User.objects.create_user
+            User.objects.create(password=person.password(),     username=person.username(
+            ), first_name=person.name(), last_name=person.last_name(), email=person.email())
         # date = Datetime()
         text = Text()
         internet = Internet()
         users = User.objects.all()
         for _ in range(30):
-            post = Post.objects.create(author=choice(
-                users), text=text.text(), title=text.title(), url=internet.home_page(), )
-            post.save()
+            title = text.title()
+            if not Post.objects.filter(title=title).exists():
+                Post.objects.create(author=choice(
+                    users), text=text.text(), title=title, url=internet.home_page(), )

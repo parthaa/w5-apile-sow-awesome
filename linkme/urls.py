@@ -16,42 +16,43 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from linkworld import views
-# from linkworld.backends import MyRegistrationView
+from django.conf.urls import url
+from linkworld.backends import MyRegistrationView
 from django.contrib.auth.views import (
     PasswordChangeView,
-    # PasswordChangeDoneView,
+    PasswordChangeDoneView,
     PasswordResetView,
-    # PasswordResetDoneView,
+    PasswordResetDoneView,
     PasswordResetConfirmView,
     PasswordResetCompleteView,
 )
-
 urlpatterns = [
     path("", views.index, name="home"),
+
+    path('posts/<slug>/', views.post_detail, name='post_detail'),
+    path('posts/<slug>/comment/', views.comment_on_post,
+         name='comment_on_post'),
+    path('posts/comment/<int:comment.id>/approve/',
+         views.comment_approve, name='comment_approve'),
+    path('posts/comment/<indt:comment.id>/remove/',
+         views.comment_remove, name='comment_remove'),
+    path('posts/new_post', views.new_post, name='new_post'),
     path('accounts/password/reset/', PasswordResetView.as_view(
         template_name='registration/password_reset_form.html'), name="password_reset"),
     path('accounts/password/change/', PasswordChangeView.as_view(
         template_name='registration/password_change_form.html'), name="password_change"),
-    # path('accounts/password/change/done/', PasswordChangeDoneView.as_view(
-    #     template_name='registration/password_change_done.html'), name="password_change_done"),
-    # path('accounts/password/reset/done/', PasswordResetDoneView.as_view(
-    #     template_name='registration/password_reset_done.html'), name="password_reset_done"),
+    path('accounts/password/change/done/', PasswordChangeDoneView.as_view(
+        template_name='registration/password_change_done.html'), name="password_change_done"),
+    path('accounts/password/reset/done/', PasswordResetDoneView.as_view(
+        template_name='registration/password_reset_done.html'), name="password_reset_done"),
     path('accounts/password/reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
         template_name='registration/password_reset_confirm.html'), name="password_reset_confirm"),
-    path('accounts/password/done/', PasswordResetCompleteView.as_view,
+    path('accounts/password/done/', PasswordResetCompleteView.as_view(
          template_name='registration/password_reset_complete.html'),
          name="password_reset_complete"),
-from linkworld.backends import MyRegistrationView
-
-
-urlpatterns = [
-    path("", views.index, name="home"),
-
-
     path('accounts/register/', MyRegistrationView.as_view(),
          name='registration_register'),
-
     path('accounts/', include('registration.backends.simple.urls')),
-    path('posts/<slug>/')
     path('admin/', admin.site.urls),
+
 ]
