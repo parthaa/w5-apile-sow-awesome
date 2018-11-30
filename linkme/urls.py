@@ -32,10 +32,7 @@ urlpatterns = [
     path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('posts/<slug>/comment/', views.comment_on_post,
          name='comment_on_post'),
-    path('posts/comment/<int:comment.id>/approve/',
-         views.comment_approve, name='comment_approve'),
-    path('posts/comment/<indt:comment.id>/remove/',
-         views.comment_remove, name='comment_remove'),
+
     path('posts/new_post', views.new_post, name='new_post'),
     path('accounts/password/reset/', PasswordResetView.as_view(
         template_name='registration/password_reset_form.html'), name="password_reset"),
@@ -54,5 +51,4 @@ urlpatterns = [
          name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
-
 ]
