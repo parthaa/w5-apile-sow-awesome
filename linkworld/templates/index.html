@@ -17,9 +17,9 @@
    <p class="author"> by {{ post.author | title }} </p>
    {% comment %} <p> {{ post.date | date: "Y m d }} {% endcomment %}
 
-   <hr> 
-    
-<a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}</a>
+   <hr>
+
+<a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, Votes: {{ post.votes.count }}</a>
     <hr>
 {% endfor %}
-{% endblock content %}  
+{% endblock content %}
