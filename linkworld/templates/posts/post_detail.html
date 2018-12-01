@@ -28,19 +28,19 @@
           <p>  <strong>{{ comment.commenter }}</strong></p>
 
 
-         {% endfor %}
 
 
-            {% empty %}
+             {% empty %}
 
         <p>No comments here yet :(</p>
+         {% endfor %}
 
         </div>
 
           <p>Do you wish to delete this post?</p>
 
         <form action="{% url 'delete_new_post' %}" method="POST">{% csrf_token %}
-           <input type="hidden" name="slug" value="{{ post.slug }}"/>
+           <input type="hidden" name="pk" value="{{ post.pk }}"/>
            <button type="submit" class="save btn btn-default">Delete</button>
         </form>
      {% endblock content %}

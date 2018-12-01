@@ -37,8 +37,8 @@ def new_post(request):
 
 
 def delete_new_post(request):
-    if request.POST.get('slug'):
-        post = get_object_or_404(Post, slug=request.POST.get('slug'))
+    if request.POST.get('pk'):
+        post = get_object_or_404(Post, pk=request.POST.get('pk'))
         post.delete()
         return redirect('home')
 
