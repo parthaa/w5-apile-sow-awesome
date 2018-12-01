@@ -1,15 +1,13 @@
 from django.shortcuts import render, redirect
 from linkworld.models import Post, Comment, Vote
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, resolve_url
 from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-
 def index(request):
-    posts = Post.objects.all().order_by("-date")
-    comments = Comment.objects.all().order_by("-date")
-    return render(request, 'index.html', {'posts': posts, 'comments': comments, })
+    posts = Post.posts_by_comments()
+    return render(request, 'index.html', {'posts': posts })
 
 
 def post_detail(request, slug):
@@ -70,4 +68,4 @@ def upvote(request, slug):
     if request.method == "POST":
         if not Vote.objects.filter(post=post, user = request.user).exists():
             Vote.objects.create(post = post, user = request.user)
-        return redirect('post_detail', slug=slug)
+        return redirect(('{}#' + post.slug).format(resolve_url('home')))

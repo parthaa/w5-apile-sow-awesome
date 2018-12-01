@@ -13,7 +13,8 @@
 
 {% paginate posts %}
 {% for post in posts %}
-  <h3> <a href ="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
+  <h3>
+    <a name="{{ post.slug }}" href ="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
    <p><a href="{{ post.url }}">link</a></p>
    <p> {{ post.text|truncatewords:100 }} </p>
    <p class="author"> by {{ post.author | title }} </p>
@@ -23,8 +24,17 @@
 
 <a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, </a>
     <hr>
+    <div> {{post.votes.count}} Likes!
+      {% if request.user.is_authenticated %}
+        <form action="{% url 'upvote' slug=post.slug %}" method="POST">{% csrf_token %}
+           <button type="submit" class="save btn btn-default">Like</button>
+        </form>
+      {% endif %}
+    </div>
+
 {% comment %}
-<a href="upvote/{{ post.slug }}" Votes: {{ post.votes.count }}>Likes</a> {% endcomment %}
+
+{% endcomment %}
 {% endfor %}
 
 {% show_pages %}

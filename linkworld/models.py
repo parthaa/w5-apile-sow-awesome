@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-
+from django.db.models import Count
 
 class Post(models.Model):
     author = models.ForeignKey(
@@ -19,6 +19,10 @@ class Post(models.Model):
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
+
+    @classmethod
+    def posts_by_comments(cls):
+        return cls.objects.annotate(vote_counts = Count('votes')).order_by("-vote_counts")
 
 
 class Comment(models.Model):
