@@ -6,8 +6,13 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
 def index(request):
-    posts = Post.posts_by_comments()
-    return render(request, 'index.html', {'posts': posts })
+    posts = Post.posts_by_popularity()
+    posts_liked_by_user = []
+    if request.user.is_authenticated:
+        posts_liked_by_user = Post.liked_by_user(request.user)
+
+    return render(request, 'index.html', {'posts': posts,
+                        "posts_liked": posts_liked_by_user })
 
 
 def post_detail(request, slug):

@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
 import os.path
-from linkworld.models import Post, Comment
+from linkworld.models import Post, Comment, Vote
 from mimesis import Person, Text, Internet, Datetime
 from random import choice
 from django.contrib.auth.models import User
@@ -32,6 +32,12 @@ class Command(BaseCommand):
                     users), text=text.text(), title=title, url=internet.home_page(), )
 
         posts = Post.objects.all()
-        for _ in range(10):
+        for _ in range(1000):
             Comment.objects.create(commenter=choice(
                 users), post=choice(posts), content=text.sentence())
+
+        for _ in range(100):
+            post = choice(posts)
+            user = choice(users)
+            if not Vote.objects.filter(post=post, user=user).exists():
+               Vote.objects.create(user = user, post = post)

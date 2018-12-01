@@ -24,12 +24,13 @@
 
 <a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, </a>
     <hr>
-    <div> {{post.votes.count}} Likes!
-      {% if request.user.is_authenticated %}
-        <form action="{% url 'upvote' slug=post.slug %}" method="POST">{% csrf_token %}
-           <button type="submit" class="save btn btn-default">Like</button>
+    <div> <span>{{post.votes.count}} Likes!
+      {% if request.user.is_authenticated  and not post in posts_liked %}
+        <form name="form{{ post.pk }}" action="{% url 'upvote' slug=post.slug %}" method="POST">{% csrf_token %}
+          <a href="#" onclick="document.forms['form{{ post.pk }}'].submit(); return false;">Like</a>
         </form>
       {% endif %}
+      </span>
     </div>
 
 {% comment %}
