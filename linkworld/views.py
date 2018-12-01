@@ -59,13 +59,14 @@ def comment_on_post(request, slug):
 
 
 def delete_comment(request):
+    if request.POST.get('pk'):
+        comment = get_object_or_404(Comment, pk=request.POST.get('pk'))
+        post = comment.post
+        comment.delete()
+        return redirect('post_detail', slug = post.slug )
 
-    if request.POST.get('delete'):
-        Comment.objects.all().delete()
-        return redirect('home')
-
-# def upvote(request, slug):
-#     post = Post.objects.get(slug=slug)
-#     post.score += 1
-#     post.save()
-#     return redirect('home', slug-post.slug)
+def upvote(request):
+    post = Post.objects.get(slug=slug)
+    post.score += 1
+    post.save()
+    return redirect('home', slug-post.slug)
