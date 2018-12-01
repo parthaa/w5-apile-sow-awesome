@@ -14,11 +14,19 @@
     <h2>{{ post.author }}</h2>
 
     <p>{{ post.text }}</p>
+
+
+          <p> {{post.votes.count}} Likes! </p>
+        <form action="{% url 'upvote' slug=post.slug %}" method="POST">{% csrf_token %}
+           <button type="submit" class="save btn btn-default">Like</button>
+        </form>
+
+
+
          <form action="{% url 'delete_comment' %}" method="POST">{% csrf_token %}
            <input type="hidden" name="pk" value="{{ comment.pk }}"/>
            <button type="submit" class="save btn btn-default">Delete Comment</button>
         </form>
-
 
     <hr>
         <a class="btn btn-default" href="{% url 'comment_on_post' slug=post.slug %}">Add comment</a>

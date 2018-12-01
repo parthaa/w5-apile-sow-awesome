@@ -17,14 +17,14 @@
    <p><a href="{{ post.url }}">link</a></p>
    <p> {{ post.text|truncatewords:100 }} </p>
    <p class="author"> by {{ post.author | title }} </p>
-   
+
 
    <hr>
 
 <a href="{% url 'post_detail' slug=post.slug %}">Comments: {{ post.comments.count }}, </a>
     <hr>
-{% comment %} 
-<a href="upvote/{{ post.slug }}" Votes: {{ post.votes.count }}>Like me!</a> {% endcomment %}
+{% comment %}
+<a href="upvote/{{ post.slug }}" Votes: {{ post.votes.count }}>Likes</a> {% endcomment %}
 {% endfor %}
 
 {% show_pages %}
