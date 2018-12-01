@@ -24,15 +24,24 @@ def post_detail(request, slug):
 
 def new_post(request):
 
+    form = PostForm(request.POST)
     if request.method == "POST":
-        form = PostForm(request.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.save()
             return redirect('home')
+
     else:
         form = PostForm()
     return render(request, 'posts/new_post.html', {'form': form})
+
+
+def delete_new_post(request):
+    form = PostForm(request.POST)
+    new_post = form.save()
+    if request.POST.get('delete'):
+        new_post.delete()
+        return redirect('home')
 
 
 def comment_on_post(request, slug):
@@ -44,10 +53,17 @@ def comment_on_post(request, slug):
             comment.post = post
             comment.save()
             return redirect('post_detail', slug=post.slug)
+
     else:
         form = CommentForm()
     return render(request, 'posts/comment_on_post.html', {'form': form})
 
+
+def delete_comment(request):
+
+    if request.POST.get('delete'):
+        Comment.objects.all().delete()
+        return redirect('home')
 
 # def upvote(request, slug):
 #     post = Post.objects.get(slug=slug)
