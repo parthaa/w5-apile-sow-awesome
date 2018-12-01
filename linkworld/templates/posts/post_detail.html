@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load gravatar %}
 {% load staticfiles %}
 
 {% block title %}
@@ -11,7 +11,8 @@
 {% block content %}
 
     <p>{{ post.title }}</p>
-    <h2>{{ post.author }}</h2>
+    <h2><img src="{% gravatar_url post.author.email 150 %}" height="42" width="42"/>
+{{ post.author }}</h2>
 
     <p>{{ post.text }}</p>
 
@@ -37,7 +38,8 @@
 
             <p>{{ comment.content }}</p>
 
-          <p>  <strong>{{ comment.commenter }}</strong></p>
+          <p> <img src="{% gravatar_url comment.commenter.email 150 %}" height="42" width="42"/>
+ <strong>{{ comment.commenter }}</strong></p>
         <form action="{% url 'delete_comment' %}" method="POST">{% csrf_token %}
            <input type="hidden" name="pk" value="{{ comment.pk }}"/>
            <button type="submit" class="save btn btn-default">Delete Comment</button>

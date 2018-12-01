@@ -7,53 +7,59 @@
                 LinkMe
         {% endblock title %}
         </title>
-        
+
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-       
+
     </head>
 
     {% block header %}
 
     {% endblock header %}
-    
-<body> 
-            
+
+<body>
+ {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <!-- as well as override content bits -->
 <div class="header">
-       
+
                     <h1>LinkWorld</h1>
-                    
-                    <h2 class="blinking">Information linked to your fingertips...</h2>        
-             
-        
-</div>  
- 
+
+                    <h2 class="blinking">Information linked to your fingertips...</h2>
+
+
+</div>
+
             <nav>
                     <a href="{% url 'home' %}">Home</a>
                     {% if user.is_authenticated %}
-                   
+
                         <a href="{% url 'auth_logout' %}">Logout</a>
-                    
+
                     {% else %}
-                  
+
                         <a href="{% url 'auth_login' %}">Login</a>
-                   
-                   
+
+
                         <a href="{% url 'registration_register' %}">Register</a>
-                    
+
                     {% endif %}
-                
+
             </nav>
-   
+
 
 
     {% block content %}
-    
+
     {% endblock content %}
-    
+
     {% block footer %}
-    
+
     {% endblock footer %}
-    
+
     </body>
 </html>
