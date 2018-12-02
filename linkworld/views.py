@@ -5,15 +5,21 @@ from linkworld.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib import messages
+from django.conf import settings
 
 def index(request):
-    posts = Post.posts_by_popularity()
+    posts = list(Post.posts_by_popularity())
     posts_liked_by_user = []
     if request.user.is_authenticated:
         posts_liked_by_user = Post.liked_by_user(request.user)
+    page = 1
+    if request.GET.get("highlight_id"):
+        highlight_post = get_object_or_404(Post, pk=request.GET.get("highlight_id"))
+        page = 1 + int(posts.index(highlight_post) / settings.EL_PAGINATION_PER_PAGE)
 
     return render(request, 'index.html', {'posts': posts,
-                        "posts_liked": posts_liked_by_user })
+                        "posts_liked": posts_liked_by_user,
+                        "page": page })
 
 
 def post_detail(request, slug):
@@ -84,4 +90,6 @@ def upvote(request, slug):
             messages.add_message(request, messages.INFO, 'You voted.')
         else:
             messages.add_message(request, messages.INFO, 'Already voted.')
-        return redirect(('{}#' + post.slug).format(resolve_url('home')))
+        home_url = "{url}?highlight_id={post_id}#{slug}".format(
+                        url = resolve_url('home'), slug=post.slug, post_id=post.id)
+        return redirect(home_url)

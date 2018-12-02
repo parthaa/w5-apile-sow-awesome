@@ -11,7 +11,7 @@
 {% block content %}
 <p><a href="{% url 'new_post'  %}">Do you want to add a new post?</a> </p>
 
-{% paginate posts %}
+{% paginate posts starting from page page %}
 {% for post in posts %}
   <h3>
     <img src="{% gravatar_url post.author.email 150 %}" height="42" width="42"/>
