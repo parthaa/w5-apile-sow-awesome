@@ -22,7 +22,8 @@ class Post(models.Model):
 
     @classmethod
     def posts_by_popularity(cls):
-        return cls.objects.annotate(vote_counts = Count('votes')).order_by("-vote_counts")
+        return cls.objects.annotate(vote_counts = Count('votes')
+                                    ).order_by("-vote_counts","-date")
 
     @classmethod
     def liked_by_user(cls, user):
