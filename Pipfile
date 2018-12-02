@@ -14,7 +14,7 @@ gunicorn = "*"
 django-heroku = "*"
 django-el-pagination = "*"
 django-gravatar2="*"
-
+django-find="==0.7"
 [dev-packages]
 mimesis = "*"
 
